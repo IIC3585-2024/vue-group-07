@@ -3,21 +3,20 @@ import CategoryView from '../views/CategoryView.vue'
 import GalleryView from '../views/GalleryView.vue'
 import BookView from '../views/BookView.vue'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+const history = createWebHistory(import.meta.env.BASE_URL);
+const routes = [
     {
       path: '/',
       name: "home",
       component: CategoryView
     },
     {
-      path: '/gallery/:id',
+      path: '/gallery',
       name: 'gallery',
       component: GalleryView
     },
     {
-      path: '/book/:id',
+      path: '/book',
       name: 'book',
       component: BookView
     },
@@ -25,7 +24,6 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       redirect: { name: "home" }
     }
-  ]
-})
+  ];
 
-export default router
+export default () => createRouter({ history, routes });
