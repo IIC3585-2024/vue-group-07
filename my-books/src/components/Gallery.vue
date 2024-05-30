@@ -1,28 +1,15 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 import BookCard from './BookCard.vue';
 
 const books = ref([])
-</script>
-
-<template>
-    <div>
-        <h1> gallery </h1>
-        <h2> {{ currentCategory.name }} </h2>
-        <ul>
-            <li v-for="book in books" :key="book.id">
-                <h3>{{ book.title }}</h3>
-                <p>{{ book.author }}</p>
-                <p>{{ book.description }}</p>
-            </li>
-        </ul>
-    </div>
-</template>
+</script> -->
 
 <script>
 import { useCurrentStore } from '@/stores/current';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import BookCard from './BookCard.vue';
 
 export default {
     setup() {
@@ -38,7 +25,8 @@ export default {
             // get books from the API and set them to the books data , get first 10 books
             axios.get('http://openlibrary.org/search.json?title=the+lord+of+the+rings&page=1&limit=10')
                 .then(response => {
-                    this.books = response.data.docs;
+                    const books = response.data.docs;
+                    this.books = books.filter(book => 'author_name' in book && 'title' in book);
                 });
         } catch (error) {
             console.error(error);
@@ -48,7 +36,37 @@ export default {
         return {
             books: []
         }
-    }     
+    },
+    components: {
+        BookCard
+    }  
 }
 
 </script>
+
+<template>
+    <main>
+        <h1> Gallery </h1>
+        <!-- <h2> {{ currentCategory.name }} </h2> -->
+        <div class="gallery">
+            <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" />
+        </div>
+    </main>
+</template>
+
+<style>
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+</style>

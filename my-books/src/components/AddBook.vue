@@ -37,6 +37,7 @@ function updateBooks(searchResults) {
     books.value = searchResults;
 }
 
+// TODO: Mover función a un archivo de utilidades
 function searchBook() {
     console.log("searching book")
     const store = useSearchBookStore();
