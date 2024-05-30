@@ -3,9 +3,9 @@
         <div class="categories">
             <ul>
                 <li v-for="category in categories" :key="category.id">
-                    <router-link :to="{ name: 'gallery', params: { id: category.id }}">
+                    <a @click="moveCategory(category)">
                         {{ category.name }}
-                    </router-link>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -14,11 +14,28 @@
 
 <script>
 import { categories } from '../data/categories';
+import { useCurrentStore } from '@/stores/current';
+
+import { useRouter } from 'vue-router';
+
+
 
 export default {
+    setup() {
+        const store = useCurrentStore();
+        const router = useRouter();
+        const moveCategory = (category) => {
+            store.setCurrentCategory(category);
+            router.push({ name: 'gallery' });
+        }
+
+        return {
+            moveCategory
+        }
+    },
     data() {
         return {
-            categories: categories
+            categories: categories,
         }
     }
 }
