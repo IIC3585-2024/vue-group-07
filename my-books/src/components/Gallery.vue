@@ -26,7 +26,8 @@ export default {
             axios.get('http://openlibrary.org/search.json?title=the+lord+of+the+rings&page=1&limit=10')
                 .then(response => {
                     const books = response.data.docs;
-                    this.books = books.filter(book => 'author_name' in book && 'title' in book);
+                    this.books = books.filter(book => 'author_name' in book && 'title' in book && 'cover_i' in book);
+                    console.log(this.books)
                 });
         } catch (error) {
             console.error(error);
@@ -49,7 +50,7 @@ export default {
         <h1> Gallery </h1>
         <!-- <h2> {{ currentCategory.name }} </h2> -->
         <div class="gallery">
-            <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" />
+            <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i"/>
         </div>
     </main>
 </template>
