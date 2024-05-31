@@ -74,10 +74,14 @@ const selectedBook = ref(null);
 
 function addBook(book) {
     selectedBook.value = {
-        openlibrary_key: book.key,
+        key: book.key,
         title: book.title,
         author_name: book.author_name,
-        cover_i: book.cover_i
+        first_publish_year: book.first_publish_year,
+        cover_i: book.cover_i,
+        ratings_average: book.ratings_average,
+        ratings_count: book.ratings_count,
+        number_of_pages_median: book.number_of_pages_median,
     }
     showAddBookPopUp.value = true;
 }
