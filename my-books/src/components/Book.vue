@@ -44,13 +44,77 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
+    <main>
         <img v-if="mounted" :src="coverURL" alt="book" class="cover"/>
-        <h2>{{ book.title }}</h2>
-        <p>by {{ authorsString }}</p>
-        <p>{{ book.first_publish_year }}</p>
-        <p>{{ book.ratings_average }} - {{ book.ratings_count }} ratings</p>
-        <p>Pages: {{ book.number_of_pages_median }}</p>
-        <p>{{ description }}</p>
-    </div>
+        <div v-if="mounted">
+            <h1>{{ book.title }}</h1>
+            <h2>by {{ authorsString }}</h2>
+            <p class="publish-year">Published in {{ book.first_publish_year }}</p>
+            <p>{{ book.number_of_pages_median }} Pages</p>
+            <ul class="ratings">
+                <li class="rating-avg">
+                    <span v-for="n in Math.floor(book.ratings_average)" class="star">★</span>
+                    <span class="average">{{ book.ratings_average.toFixed(2) }}</span>
+                </li>
+                <li>-</li>
+                <li>{{ book.ratings_count }} Ratings</li>
+            </ul>
+            <p class="description">{{ description }}</p>
+        </div>
+    </main>
 </template>
+
+<style scoped>
+main {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.cover {
+    width: 16rem;
+    height: auto;
+    max-height: 25rem;
+    margin-right: 3rem;
+    margin-top: 0.9rem;
+}
+
+.publish-year {
+    margin-top: 0.5rem;
+}
+
+.ratings {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 0.3rem;
+}
+
+.rating-avg {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.star {
+    font-size: 1.2em;
+}
+
+.average {
+    margin-left: 0.3rem;
+}
+
+.description {
+    margin-top: 2rem;
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+</style>
