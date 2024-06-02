@@ -27,8 +27,7 @@ const coverURL = computed(() => {
 
 <style scoped >
 .card {
-    border: 1px solid black;
-    background-color: hsla(160, 100%, 37%, 1);
+    background-color: #2f2f2f;
     border-radius: 5px;
     color: #fff;
     padding: 10px;
@@ -37,6 +36,10 @@ const coverURL = computed(() => {
     text-align: center;
     text-wrap: wrap;
     height: auto;
+}
+
+.card:hover {
+    cursor: pointer;
 }
 
 .cover {
