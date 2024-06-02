@@ -62,7 +62,7 @@ function searchBook() {
         </div>
     </div>
 
-    <AddBookPopUp v-if = "showAddBookPopUp" :book = "selectedBook" @close = "showAddBookPopUp = false"/>
+    <AddBookPopUp v-if="showAddBookPopUp" :book="selectedBook" :close-function="() => showAddBookPopUp = false"/>
 </template>
 
 <script>
