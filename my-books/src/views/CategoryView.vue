@@ -1,6 +1,6 @@
 <script setup>
 import { categories } from '../data/categories';
-import CategoryList from '../components/CategoryList.vue';
+import CategoryBoard from '../components/CategoryBoard.vue';
 import AddBook from '../components/AddBook.vue';
 </script>
 
@@ -8,7 +8,7 @@ import AddBook from '../components/AddBook.vue';
     <div>
         <h1>My Books</h1>
         <p>Select a category to view the books</p>
-        <CategoryList />
         <AddBook />
+        <CategoryBoard />
     </div>
 </template>
