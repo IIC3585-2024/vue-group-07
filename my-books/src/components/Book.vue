@@ -118,7 +118,6 @@ onMounted(() => {
 .container {
     display: flex;
     flex-direction: row;
-    flex: 1;
 }
 
 h1 {

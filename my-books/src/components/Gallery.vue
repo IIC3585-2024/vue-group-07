@@ -1,14 +1,6 @@
-<!-- <script setup>
-import { ref } from 'vue';
-import BookCard from './BookCard.vue';
-
-const books = ref([])
-</script> -->
-
 <script>
 import { useCurrentStore } from '@/stores/current';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import BookCard from './BookCard.vue';
 import { useBooksStore } from '@/stores/db';
 import { getBooksByCategory } from '@/lib/getBooksbyCategory';
@@ -40,7 +32,8 @@ export default {
     },
     data() {
         return {
-            books: []
+            books: [],
+            currentCategory: this.currentCategory
         }
     },
     components: {
@@ -52,8 +45,7 @@ export default {
 
 <template>
     <main>
-        <h1> Gallery </h1>
-        <!-- <h2> {{ currentCategory.name }} </h2> -->
+        <h1> {{ currentCategory.name }} </h1>
         <div class="gallery">
             <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" @click="moveToBook(book)"/>
         </div>
@@ -65,6 +57,8 @@ main {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-width: 70vw;
+    height: 90vh;
     width: 100%;
 }
 
@@ -73,6 +67,7 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
     margin: 20px;
 }
 </style>
