@@ -16,13 +16,12 @@
 <style>
 
 .board {
-    border: 2px solid black;
-    border-radius: 3px;
-    background-color: rgb(0, 86, 57);
+    background-color: transparent;
 }
 
 .row {
     display: flex;
+    align-items: flex-start;
     padding: 10px;
     min-height: 70vh;
 }
@@ -31,15 +30,14 @@
     display: flex;
     flex-direction: column;
     column-gap: 50px;
-    border: 2px solid black;
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 10px;
-    margin: 0 5px;
-    min-width: 300px;
+    margin: 0 1rem;
+    width: 20rem;
     text-align: center;
     align-content: start;
     justify-items: center;
-    background-color: #181818;
+    background-color: #202020;
 }
 
 .scroll-container {
@@ -56,10 +54,7 @@
 <script>
 import { categories } from '../data/categories';
 import { useCurrentStore } from '@/stores/current';
-
 import { useRouter } from 'vue-router';
-
-import axios from 'axios';
 import BoardBookCard from './BoardBookCard.vue';
 import { getBooksByCategory } from '@/lib/getBooksbyCategory';
 
