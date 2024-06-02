@@ -9,7 +9,8 @@ import Book from './Book.vue';
 const store = useBooksStore();
 const router = useRouter();
 const props = defineProps({
-    book: Object
+    book: Object,
+    closeFunction: Function,
 });
 
 const coverURL = computed(() => {
@@ -25,6 +26,7 @@ const authorsString = computed(() => {
 <template>
     <div class="popup">
         <div class="popup-inner">
+            <img class="close-btn" src="../assets/close.svg" alt="Close" @click="closeFunction()"/>
             <h2> Do you want to add the following book to a category? </h2>
             <Book class="popup-book" :book="props.book" />
         </div>
@@ -44,6 +46,12 @@ export default {
 
 <style scoped>
 
+.close-btn {
+    cursor: pointer;
+    align-self: flex-end;
+    fill: white
+}
+
 .popup {
     position: fixed;
     top: 0;
@@ -60,6 +68,7 @@ export default {
     .popup-inner {
         background: #181818;
         padding: 20px;
+        padding-bottom: 50px;
         border-radius: 5px;
         width: 80%;
         align-items: center;
