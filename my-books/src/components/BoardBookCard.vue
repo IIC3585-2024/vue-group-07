@@ -35,7 +35,7 @@ const deleteBook = () => {
         <h2>{{ title }}</h2>
         <p>{{ authorsString }}</p>
         <div>
-            <button @click="deleteBook" class="delete-button"> Delete </button>
+            <button @click="deleteBook" class="button button-red"> Delete </button>
         </div>
     </div>
 </template>
@@ -53,17 +53,6 @@ const deleteBook = () => {
     text-wrap: wrap;
     height: auto;
     line-height: 1.3;
-}
-
-.delete-button {
-    background-color: #f44336;
-    margin-top: 0.8rem;
-    color: white;
-    padding: 0.5rem 1rem;
-    
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .cover {
