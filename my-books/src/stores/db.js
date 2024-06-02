@@ -20,12 +20,10 @@ export const useBooksStore = defineStore('books', {
         },
         async getBooks() {
             const tx = await getBooks();
-            this.books = tx;
             return tx;
         },
         async getBooksByCategory(category) {
             const tx = await getBooksByCategory(category);
-            this.books = tx;
             return tx;
         },
         async getBook(id) {
