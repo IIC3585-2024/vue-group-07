@@ -61,7 +61,7 @@ function searchBook() {
         </div>
     </div>
 
-    <AddBookPopUp v-if = "showAddBookPopUp" :book = "selectedBook"/>
+    <AddBookPopUp v-if = "showAddBookPopUp" :book = "selectedBook" @close = "showAddBookPopUp = false"/>
 </template>
 
 <script>
@@ -69,8 +69,6 @@ function searchBook() {
 const books = ref([]);
 const showAddBookPopUp = ref(false);
 const selectedBook = ref(null);
-
-
 
 function addBook(book) {
     selectedBook.value = {
@@ -85,6 +83,7 @@ function addBook(book) {
     }
     showAddBookPopUp.value = true;
 }
+
 export default {
     data() {
         return {
@@ -97,3 +96,7 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+
+</style>

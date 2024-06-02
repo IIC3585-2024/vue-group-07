@@ -25,20 +25,25 @@ const coverURL = computed(() => {
     </div>
 </template>
 
-<style>
+<style scoped >
 .card {
-    border: 1px solid #ccc;
+    border: 1px solid black;
+    background-color: hsla(160, 100%, 37%, 1);
     border-radius: 5px;
+    color: #fff;
     padding: 10px;
     margin: 10px;
     width: 18rem;
-    height: 24rem;
     text-align: center;
+    text-wrap: wrap;
+    height: auto;
 }
 
 .cover {
     /* max height of 260px */
-    max-height: 16rem;
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
 }
 
 </style>
