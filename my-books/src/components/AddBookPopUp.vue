@@ -24,19 +24,20 @@ const addBookDB = () => {
 </script>
 
 <template>
-    <div>
-        <h2> Do you want to add the following book to a category? </h2>
-        <BookCard :title="book.title" :authors="book.author_name" :cover-i="book.cover_i"/>
-        <h3> Select a category </h3>
-        <select v-model="selectedCategory">
-            <option v-for="category in categories" :key="category.id" :value="category.id"> {{ category.name }} </option>
-        </select>
-        <button @click="addBookDB()"> Add Book </button>
+    <div class="popup">
+        <div class="popup-inner">
+            <h2> Do you want to add the following book to a category? </h2>
+            <BookCard :title="book.title" :authors="book.author_name" :cover-i="book.cover_i"/>
+            <h3> Select a category </h3>
+            <select v-model="selectedCategory">
+                <option v-for="category in categories" :key="category.id" :value="category.id"> {{ category.name }} </option>
+            </select>
+            <button @click="addBookDB()"> Add Book </button>
+        </div>
     </div>
 </template>
 
 <script>
-
 
 export default {
     data() {
@@ -46,3 +47,32 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    .popup-inner {
+        background: #181818;
+        padding: 20px;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+
+</style>
