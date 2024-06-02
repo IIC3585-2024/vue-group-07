@@ -21,7 +21,8 @@ const book = reactive({
 });
 
 const props = defineProps({
-    book: Object
+    book: Object,
+    closeFunction: Function,
 });
 
 const description = ref('');
@@ -49,6 +50,10 @@ function redirectWraper(func) {
     return (book, category) => {
         try {
             func(book, category);
+
+            if (props.closeFunction) {
+                props.closeFunction();
+            }
             
             router.push({ name: 'home' });
         } catch (error) {
