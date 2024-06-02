@@ -28,7 +28,8 @@
 }
 
 .col {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     column-gap: 50px;
     border: 2px solid black;
     border-radius: 3px;
