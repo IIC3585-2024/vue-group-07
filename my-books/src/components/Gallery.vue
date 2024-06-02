@@ -10,28 +10,33 @@ import { useCurrentStore } from '@/stores/current';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import BookCard from './BookCard.vue';
+import { useBooksStore } from '@/stores/db';
+import { getBooksByCategory } from '@/lib/getBooksbyCategory';
+
+
 
 export default {
     setup() {
         const store = useCurrentStore();
+        const booksStore = useBooksStore();
         const router = useRouter();
         const currentCategory = store.currentCategory;
+        function moveToBook(book) {
+            const currentStore = useCurrentStore();
+            currentStore.setCurrentBook(book);
+            router.push({ name: 'book' });
+        }
         return {
-            currentCategory
+            currentCategory,
+            booksStore,
+            moveToBook
         }
     },
     mounted() {
-        try {
-            // get books from the API and set them to the books data , get first 10 books
-            axios.get('http://openlibrary.org/search.json?title=the+lord+of+the+rings&page=1&limit=10')
-                .then(response => {
-                    const books = response.data.docs;
-                    this.books = books.filter(book => 'author_name' in book && 'title' in book && 'cover_i' in book);
-                    console.log(this.books)
-                });
-        } catch (error) {
-            console.error(error);
-        }
+        getBooksByCategory(this.currentCategory)
+            .then(books => {
+                this.books = books;
+            })
     },
     data() {
         return {
@@ -50,7 +55,7 @@ export default {
         <h1> Gallery </h1>
         <!-- <h2> {{ currentCategory.name }} </h2> -->
         <div class="gallery">
-            <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i"/>
+            <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" @click="moveToBook(book)"/>
         </div>
     </main>
 </template>

@@ -4,6 +4,7 @@ import { ref, reactive, computed, onMounted, watch } from 'vue';
 import getBooksByTitle from '@/lib/getBooksByTitle';
 import getBookDescription from '@/lib/getBookDescription';
 import { getBook } from '@/db/IndexedDB';
+import { useCurrentStore } from '@/stores/current';
 
 const book = reactive({
     title: '',
@@ -32,10 +33,18 @@ watch(book, async (newBook) => {
 
 onMounted(() => {
     try {
-        getBooksByTitle('the lord of the rings').then(books => {
-            Object.assign(book, books[1]);
+        const currentStore = useCurrentStore();
+        const currentBook = currentStore.currentBook;
+        if (currentBook) {
+            Object.assign(book, currentBook);
             mounted.value = true;
-        });
+        }
+        else {
+            getBooksByTitle('the lord of the rings').then(books => {
+                Object.assign(book, books[1]);
+                mounted.value = true;
+            });
+        }
     } catch (error) {
         console.error(error);
     }
