@@ -62,7 +62,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-items: center;
 
     .popup-inner {
         background: #181818;
@@ -70,6 +69,8 @@ export default {
         border-radius: 5px;
         align-items: center;
         justify-content: center;
+        display: flex;
+        flex-direction: column;
     }
 
 }
