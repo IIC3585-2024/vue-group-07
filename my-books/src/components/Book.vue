@@ -113,7 +113,7 @@ onMounted(() => {
             <button class="button button-red" @click="redirectDelete"> Delete </button>
         </div>
         <div class="button-row" v-else>
-            <button class="button" v-for="category in filteredCategories" :key="category.id" :value="category.id" @click="redirectWraper(addBook)(book,category.id)"> {{ category.name }} </button>
+            <button class="button" v-for="(category, index) in filteredCategories" :key="category.id" :class="colorClasses[index % colorClasses.length]" :value="category.id" @click="redirectWraper(addBook)(book,category.id)"> {{ category.name }} </button>
         </div>
     </main>
 </template>
