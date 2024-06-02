@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useBooksStore } from '@/stores/db';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
     id: Number,
@@ -19,8 +20,11 @@ const coverURL = computed(() => {
 
 const booksStore = useBooksStore();
 
+const router = useRouter();
 const deleteBook = () => {
     booksStore.deleteBook(props.id);
+    // refresh the page
+    router.go();
 }
 
 </script>
@@ -31,7 +35,7 @@ const deleteBook = () => {
         <h2>{{ title }}</h2>
         <p>{{ authorsString }}</p>
         <div>
-            <button @click="deleteBook"> Delete </button>
+            <button @click="deleteBook" class="delete-button"> Delete </button>
         </div>
     </div>
 </template>
@@ -42,9 +46,24 @@ const deleteBook = () => {
     background-color: hsla(160, 100%, 37%, 1);
     border-radius: 5px;
     width: 90%;
-    min-height: 24rem;
+    margin: 5%;
+    padding: 10px;
     text-align: center;
     color: #fff;
+    text-wrap: wrap;
+    height: auto;
+    line-height: 1.3;
+}
+
+.delete-button {
+    background-color: #f44336;
+    margin-top: 0.8rem;
+    color: white;
+    padding: 0.5rem 1rem;
+    
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .cover {
