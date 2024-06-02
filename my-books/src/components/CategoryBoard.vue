@@ -5,7 +5,7 @@
                 <a @click="moveCategory(category)">
                     {{ category.name }}
                 </a>
-                <BookCard v-for="book in books" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i"/>
+                <BoardBookCard v-for="book in books[category.id]" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" :id="book.id"/>
             </div>
         </div>
     </div>
@@ -48,7 +48,8 @@ import { useCurrentStore } from '@/stores/current';
 import { useRouter } from 'vue-router';
 
 import axios from 'axios';
-import BookCard from './BookCard.vue';
+import BoardBookCard from './BoardBookCard.vue';
+import { getBooksByCategory } from '@/lib/getBooksbyCategory';
 
 
 
@@ -69,13 +70,12 @@ export default {
 
     mounted() {
         try {
-            // get books from the API and set them to the books data , get first 10 books
-            axios.get('http://openlibrary.org/search.json?title=the+lord+of+the+rings&page=1&limit=10')
-                .then(response => {
-                    const books = response.data.docs;
-                    this.books = books.filter(book => 'author_name' in book && 'title' in book && 'cover_i' in book);
-                    console.log(this.books)
+            // get books from each category and set them to the books data
+            for (let category of categories) {
+                getBooksByCategory(category).then((books) => {
+                    this.books[category.id] = books;
                 });
+            }
         } catch (error) {
             console.error(error);
         }
@@ -88,7 +88,7 @@ export default {
         }
     },
     components: {
-        BookCard
+        BoardBookCard
     }
 }
 </script>
