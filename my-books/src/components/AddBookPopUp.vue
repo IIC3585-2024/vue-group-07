@@ -25,7 +25,6 @@ const authorsString = computed(() => {
 
 <template>
     <div class="popup">
-        
         <div class="popup-inner">
             <img class="close-btn" src="../assets/close.svg" alt="Close" @click="closeFunction()"/>
             <h2> Do you want to add the following book to a category? </h2>
@@ -69,6 +68,7 @@ export default {
     .popup-inner {
         background: #181818;
         padding: 20px;
+        padding-bottom: 50px;
         border-radius: 5px;
         width: 80%;
         align-items: center;
