@@ -32,6 +32,7 @@
     padding: 10px;
     margin: 0 5px;
     min-width: 300px;
+    text-align: center;
 }
 
 .scroll-container {

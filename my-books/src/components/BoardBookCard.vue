@@ -39,10 +39,9 @@ const deleteBook = () => {
 <style>
 .card {
     border: 1px solid #ccc;
+    background-color: hsla(160, 100%, 37%, 1);
     border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    width: 18rem;
+    width: 80%;
     height: 24rem;
     text-align: center;
 }
