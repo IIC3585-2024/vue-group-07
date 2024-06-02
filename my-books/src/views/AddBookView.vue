@@ -6,7 +6,7 @@ import AddBook from '../components/AddBook.vue';
 
 <template>
     <div>
-        <h1>My Books</h1>
+        <h1>My Books 📚</h1>
         <p>Search for a book to add to your collection.</p>
         <AddBook />
     </div>

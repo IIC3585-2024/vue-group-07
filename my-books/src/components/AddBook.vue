@@ -45,17 +45,18 @@ function searchBook() {
 
 <template>
     <div>
-        <h2> Search Book </h2>
-        <input type = "text" placeholder = "The lord of the rings" v-model = "text">
-        <select v-model = "field">
-            <option value = "q"> All </option>
-            <option value = "title"> Title </option>
-            <option value = "author"> Author </option>
-        </select>
-        <button @click = "searchBook()"> Search </button>
-        <div>
-            <h3> Search Results </h3>
-            <div class = "gallery">
+        <h2 id="search-title"> Search Book </h2>
+        <div class="search">
+            <input class="text-search" type="text" placeholder="The Lord of the Rings" v-model="text" />
+            <select class="search-by" v-model="field">
+                <option value = "q"> All </option>
+                <option value = "title"> Title </option>
+                <option value = "author"> Author </option>
+            </select>
+            <button class="search-submit" @click="searchBook()"> Search </button>
+        </div>
+        <div class="results-container">
+            <div class="gallery">
                 <BookCard v-for = "book in books" :title = "book.title" :authors = "book.author_name" :cover-i = "book.cover_i" @click = "addBook(book)"/>
             </div>
         </div>
@@ -99,4 +100,61 @@ export default {
 
 <style scoped>
 
+#search-title {
+    margin-top: 0.5rem;
+}
+
+.search {
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    .text-search {
+        font-size: 1.2em;
+        background-color: #2f2f2f;
+        appearance: none;
+        border: 0;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: rgba(235, 235, 235, .6);
+    }
+
+    .text-search:focus {
+        outline: solid;
+        outline-color: hsla(160, 100%, 37%, 1);
+    }
+
+    .search-by {
+        font-size: 1.2em;
+        background-color: #2f2f2f;
+        appearance: none;
+        border: 0;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: rgba(235, 235, 235, .6);
+    }
+
+    .search-by:focus {
+        outline: solid;
+        outline-color: hsla(160, 100%, 37%, 1);
+    }
+
+    .search-submit {
+        font-size: 1.2em;
+        font-weight: semibold;
+        background-color: hsla(160, 100%, 37%, 1);
+        appearance: none;
+        border: 0;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: rgba(255, 255, 255, .9);
+    }
+
+    .search-submit:hover {
+        background-color: hsla(160, 100%, 40%, 1);
+        cursor: pointer;
+    }
+}
 </style>
