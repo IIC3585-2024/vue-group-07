@@ -5,14 +5,6 @@ export const useCurrentStore = defineStore('current', {
         currentCategory: null,
         currentBook: null
     }),
-    getters: {
-        getCurrentCategory() {
-            return this.currentCategory
-        },
-        getCurrentBook() {
-            return this.currentBook
-        }
-    },
     actions: {
         setCurrentCategory(category) {
             this.currentCategory = category
