@@ -1,10 +1,9 @@
 <script setup>
 
 import { ref, reactive, computed, onMounted, watch } from 'vue';
-import getBooksByTitle from '@/lib/getBooksByTitle';
 import getBookDescription from '@/lib/getBookDescription';
-import { getBook } from '@/db/IndexedDB';
 import { useCurrentStore } from '@/stores/current';
+import { useBooksStore } from '@/stores/db';
 import { categories } from '../data/categories';
 import { useRoute, useRouter } from 'vue-router';
 import { moveBook, addBook, deleteBook } from '@/lib/postBook';
@@ -77,18 +76,27 @@ function redirectDelete() {
 
 
 onMounted(() => {
+
     try {
         const currentStore = useCurrentStore();
         const currentBook = currentStore.currentBook;
+        const bookId = useRoute().params.id;
+
         if (props.book) {
             Object.assign(book, props.book);
             mounted.value = true;
+        } else if (bookId) {
+            const booksStore = useBooksStore();
+            booksStore.getBook(bookId)
+                .then((DBbook) => {
+                    console.log(book)
+                    Object.assign(book, DBbook);
+                    mounted.value = true;
+                });
         }
-        else {
-            if (currentBook) {
+        else if (currentBook) {
                 Object.assign(book, currentBook);
                 mounted.value = true;
-            }
         }
     } catch (error) {
         console.error(error);
