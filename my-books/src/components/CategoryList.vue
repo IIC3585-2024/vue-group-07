@@ -26,7 +26,7 @@ export default {
         const router = useRouter();
         const moveCategory = (category) => {
             store.setCurrentCategory(category);
-            router.push({ name: 'gallery' });
+            router.push({ name: 'gallery', params: { category: category.id } });
         }
 
         return {

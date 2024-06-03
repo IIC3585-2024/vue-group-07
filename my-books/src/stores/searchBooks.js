@@ -5,14 +5,6 @@ export const useSearchBookStore = defineStore('search', {
         searchQuery: '',
         searchResults: []
     }),
-    getters: {
-        getSearchQuery() {
-            return this.searchQuery
-        },
-        getSearchResults() {
-            return this.searchResults
-        }
-    },
     actions: {
         setSearchQuery(query) {
             this.searchQuery = query

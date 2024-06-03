@@ -29,7 +29,7 @@ export default {
         return {
         tabs: [
             { id: 'board', name: 'Board', route: '/', active: true },
-            { id: 'all-books', name: 'All Books', route: '/gallery', active: false },
+            { id: 'all-books', name: 'All Books', route: '/gallery/all', active: false },
             { id: 'add-book', name: 'Add Book', route: '/add-book', active: false },
         ],
         categories: categories,

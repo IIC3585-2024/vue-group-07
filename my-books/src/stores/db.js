@@ -27,7 +27,7 @@ export const useBooksStore = defineStore('books', {
             return tx;
         },
         async getBook(id) {
-            const tx = await getBook(id);
+            const tx = await getBook(parseInt(id));
             return tx;
         },
         async clearBooksinCategory(category) {

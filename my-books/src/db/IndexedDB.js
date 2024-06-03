@@ -38,7 +38,7 @@ export const getBooksByCategory = async (category) => {
 
 export const getBook = async (id) => {
     const db = await dbPromise;
-    const tx = db.get("books", id);
+    const tx = await db.get("books", id)
     return tx;
 }
 

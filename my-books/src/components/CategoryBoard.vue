@@ -7,7 +7,7 @@
                         {{ category.name }}
                     </a>
                 </h3>
-                <BoardBookCard v-for="book in books[category.id]" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" :id="book.id"/>
+                <BoardBookCard v-for="book in books[category.id]" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" :id="book.id" @click="moveToBook(book)"/>
             </div>
         </div>
     </div>
@@ -67,11 +67,17 @@ export default {
         const router = useRouter();
         const moveCategory = (category) => {
             store.setCurrentCategory(category);
-            router.push({ name: 'gallery' });
+            router.push({ name: 'gallery', params: { category: category.id } });
+        }
+        function moveToBook(book) {
+            const currentStore = useCurrentStore();
+            currentStore.setCurrentBook(book);
+            router.push({ name: 'book' , params: { id: book.id } });
         }
 
         return {
-            moveCategory
+            moveCategory,
+            moveToBook
         }
     },
 

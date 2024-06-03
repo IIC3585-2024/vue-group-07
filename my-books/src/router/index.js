@@ -12,12 +12,12 @@ const routes = [
       component: CategoryView
     },
     {
-      path: '/gallery',
+      path: '/gallery/:category',
       name: 'gallery',
       component: GalleryView
     },
     {
-      path: '/book',
+      path: '/book/:id',
       name: 'book',
       component: BookView
     },
