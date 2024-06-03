@@ -10,6 +10,7 @@ import getBooksByParam from '@/lib/getBooksByParam';
 
 const text = ref('');
 const field = ref('q');
+const found = ref(true);
 
 // TODO: Mover función a un archivo de utilidades
 function searchBook() {
@@ -30,6 +31,11 @@ function searchBook() {
     try {
         const getBooks = async () => {
             books.value = await getBooksByParam(searchQuery, searchParam);
+            if (books.value.length === 0) {
+                found.value = false;
+            } else {
+                found.value = true;
+            }
         }
         getBooks();
         
@@ -56,6 +62,9 @@ function searchBook() {
             <div class="gallery">
                 <BookCard v-for = "book in books" :title = "book.title" :authors = "book.author_name" :cover-i = "book.cover_i" @click = "addBook(book)"/>
             </div>
+        </div>
+        <div class="waring-message" v-if="!found">
+            <h3> No books found </h3>
         </div>
     </div>
 
