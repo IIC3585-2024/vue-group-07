@@ -14,6 +14,10 @@ const book = reactive({
     author_name: [],
     cover_i: 0,
     key: '',
+    first_publish_year: 0,
+    number_of_pages_median: 0,
+    ratings_average: 0,
+    ratings_count: 0,
 });
 
 const props = defineProps({
