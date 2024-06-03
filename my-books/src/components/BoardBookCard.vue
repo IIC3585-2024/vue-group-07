@@ -21,10 +21,16 @@ const coverURL = computed(() => {
 const booksStore = useBooksStore();
 
 const router = useRouter();
+
 const deleteBook = () => {
     booksStore.deleteBook(props.id);
     // refresh the page
     router.go();
+}
+
+const handleDeleteClick = (event) => {
+    event.stopPropagation();
+    deleteBook();
 }
 
 </script>
@@ -35,7 +41,7 @@ const deleteBook = () => {
         <h2>{{ title }}</h2>
         <p>{{ authorsString }}</p>
         <div>
-            <button @click="deleteBook" class="button button-red"> Delete </button>
+            <button @click="handleDeleteClick" class="button button-red"> Delete </button>
         </div>
     </div>
 </template>
@@ -55,6 +61,10 @@ const deleteBook = () => {
     img {
         border-radius: 4px;
     }
+}
+
+.card:hover {
+    cursor: pointer;
 }
 
 .cover {
