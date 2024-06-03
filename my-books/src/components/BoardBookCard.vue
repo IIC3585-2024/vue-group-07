@@ -42,10 +42,8 @@ const deleteBook = () => {
 
 <style scoped>
 .card {
-    border: 1px solid black;
-    background-color: hsla(160, 100%, 37%, 1);
+    background-color: #2f2f2f;
     border-radius: 5px;
-    width: 90%;
     margin: 5%;
     padding: 10px;
     text-align: center;
@@ -53,6 +51,10 @@ const deleteBook = () => {
     text-wrap: wrap;
     height: auto;
     line-height: 1.3;
+
+    img {
+        border-radius: 4px;
+    }
 }
 
 .cover {

@@ -28,7 +28,7 @@ const authorsString = computed(() => {
         <div class="popup-inner">
             <img class="close-btn" src="../assets/close.svg" alt="Close" @click="closeFunction()"/>
             <h2> Do you want to add the following book to a category? </h2>
-            <Book class="popup-book" :book="props.book" />
+            <Book class="popup-book" :book="props.book" :closeFunction="closeFunction"/>
         </div>
     </div>
 </template>

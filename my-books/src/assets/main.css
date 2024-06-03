@@ -5,9 +5,6 @@ html {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
   scrollbar-color: #4a4a4a #2f2f2f;
 }
@@ -79,7 +76,4 @@ a {
     place-items: center;
   }
 
-  #app {
-    padding: 0 2rem;
-  }
 }

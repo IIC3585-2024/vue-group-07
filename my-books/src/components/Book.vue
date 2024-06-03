@@ -14,12 +14,17 @@ const book = reactive({
     author_name: [],
     cover_i: 0,
     key: '',
+    first_publish_year: 0,
+    number_of_pages_median: 0,
+    ratings_average: 0,
+    ratings_count: 0,
 });
 
 const filteredCategories = categories.filter((category) => category.name !== 'All books');
 
 const props = defineProps({
-    book: Object
+    book: Object,
+    closeFunction: Function,
 });
 
 const colorClasses = ["button-green", "button-blue", "button-yellow", "button-light-blue"]
@@ -49,6 +54,10 @@ function redirectWraper(func) {
     return (book, category) => {
         try {
             func(book, category);
+
+            if (props.closeFunction) {
+                props.closeFunction();
+            }
             
             router.push({ name: 'home' });
         } catch (error) {
@@ -122,7 +131,6 @@ onMounted(() => {
 .container {
     display: flex;
     flex-direction: row;
-    flex: 1;
 }
 
 h1 {

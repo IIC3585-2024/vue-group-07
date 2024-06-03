@@ -15,6 +15,8 @@ import AddBook from '../components/AddBook.vue';
 <style scoped>
 
 #book-search {
+    margin: 0 8rem;
+    padding: 2rem;
     min-width: 80vw;
     min-height: 100vh;
 }
