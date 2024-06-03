@@ -20,10 +20,14 @@ const book = reactive({
     ratings_count: 0,
 });
 
+const filteredCategories = categories.filter((category) => category.name !== 'All books');
+
 const props = defineProps({
     book: Object,
     closeFunction: Function,
 });
+
+const colorClasses = ["button-green", "button-blue", "button-yellow", "button-light-blue"]
 
 const description = ref('');
 const mounted = ref(false);
@@ -114,11 +118,11 @@ onMounted(() => {
         </div>
         </div>
         <div class="button-row" v-if="isBook">
-            <button v-for="category in categories" :key="category.id" :value="category.id" @click="redirectWraper(moveBook)(book,category.id)"> {{ category.name }} </button>
-            <button @click="redirectDelete"> Delete </button>
+            <button class="button" v-for="(category, index) in filteredCategories" :key="category.id" :class="colorClasses[index % colorClasses.length]" :value="category.id" @click="redirectWraper(moveBook)(book,category.id)"> {{ category.name }} </button>
+            <button class="button button-red" @click="redirectDelete"> Delete </button>
         </div>
         <div class="button-row" v-else>
-            <button v-for="category in categories" :key="category.id" :value="category.id" @click="redirectWraper(addBook)(book,category.id)"> {{ category.name }} </button>
+            <button class="button" v-for="(category, index) in filteredCategories" :key="category.id" :class="colorClasses[index % colorClasses.length]" :value="category.id" @click="redirectWraper(addBook)(book,category.id)"> {{ category.name }} </button>
         </div>
     </main>
 </template>
@@ -173,6 +177,10 @@ h1 {
     margin-top: 2rem;
     font-size: 1.1em;
     line-height: 1.5em;
+}
+
+.button {
+    margin-right: 5px;
 }
 
 </style>
