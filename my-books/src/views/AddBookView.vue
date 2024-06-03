@@ -6,8 +6,6 @@ import AddBook from '../components/AddBook.vue';
 
 <template>
     <div id="book-search">
-        <h1>My Books 📚</h1>
-        <p>Search for a book to add to your collection.</p>
         <AddBook />
     </div>
 </template>
