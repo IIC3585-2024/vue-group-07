@@ -12,7 +12,6 @@ html {
   scrollbar-color: #4a4a4a #2f2f2f;
 }
 
-a,
 .green {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
@@ -20,10 +19,9 @@ a,
   padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .button {
