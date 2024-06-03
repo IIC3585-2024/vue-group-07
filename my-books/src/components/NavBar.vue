@@ -4,7 +4,8 @@
         <h1 class="brand">
             My books 📚
         </h1>
-        <div
+        <router-link
+            :to="tab.route"
             v-for="(tab, index) in tabs"
             :key="index"
             @click="activateTab(tab)"
@@ -12,8 +13,8 @@
             :data-target="tab.id"
         >
             
-            <router-link :to="tab.route"> {{ tab.name }} </router-link>
-        </div>
+            {{ tab.name }} 
+        </router-link>
     </div>
 </div>
 </template>

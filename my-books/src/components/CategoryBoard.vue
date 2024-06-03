@@ -3,7 +3,7 @@
         <div class="row scroll-container">
             <div class="col" v-for="category in categories" :key="category.id">
                 <h3>
-                    <a class="col-title" @click="moveCategory(category)">
+                    <a class="col-title green" @click="moveCategory(category)">
                         {{ category.name }}
                     </a>
                 </h3>
