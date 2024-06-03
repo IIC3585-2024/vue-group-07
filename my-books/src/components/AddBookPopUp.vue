@@ -26,7 +26,9 @@ const authorsString = computed(() => {
 <template>
     <div class="popup">
         <div class="popup-inner">
-            <img class="close-btn" src="../assets/close.svg" alt="Close" @click="closeFunction()"/>
+            <div id="close-block">
+                <img class="close-btn" src="../assets/close.svg" alt="Close" @click="closeFunction()"/>
+            </div>
             <h2> Do you want to add the following book to a category? </h2>
             <Book class="popup-book" :book="props.book" :closeFunction="closeFunction"/>
         </div>
@@ -46,10 +48,19 @@ export default {
 
 <style scoped>
 
-.close-btn {
-    cursor: pointer;
-    align-self: flex-end;
-    fill: white
+#close-block {
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    padding: 20px 0;
+    background-color: #181818;
+    
+    width: 100%;
+    .close-btn {
+        cursor: pointer;
+        fill: white;
+    }
 }
 
 .popup {
@@ -67,19 +78,20 @@ export default {
 
     .popup-inner {
         background: #181818;
-        padding: 20px;
-        padding-bottom: 50px;
-        border-radius: 5px;
+        padding: 0 20px;
+        border-radius: 8px;
         width: 80%;
         align-items: center;
         justify-content: center;
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
+        max-height: 80vh;
 
         .popup-book {
-        width: 80%;
-        height: 16rem;
-        object-fit: cover;
+            width: 80%;
+            height: 16rem;
+            object-fit: cover;
         }
     }
 
