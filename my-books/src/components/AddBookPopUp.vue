@@ -1,6 +1,4 @@
 <script setup>
-import { categories } from '../data/categories';
-import { computed } from 'vue';
 import Book from './Book.vue';
 
 const props = defineProps({
@@ -21,17 +19,6 @@ const props = defineProps({
         </div>
     </div>
 </template>
-
-<script>
-
-export default {
-    data() {
-        return {
-            categories: categories,
-        }
-    }
-}
-</script>
 
 <style scoped>
 
