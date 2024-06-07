@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useBooksStore } from '@/stores/db';
 import { useRouter } from 'vue-router';
 
@@ -24,7 +24,6 @@ const router = useRouter();
 
 const deleteBook = () => {
     booksStore.deleteBook(props.id);
-    // refresh the page
     router.go();
 }
 
