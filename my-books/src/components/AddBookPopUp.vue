@@ -1,24 +1,11 @@
 <script setup>
-import BookCard from './BookCard.vue';
 import { categories } from '../data/categories';
-import { ref, computed } from 'vue';
-import { useBooksStore } from '@/stores/db';
-import { useRouter } from 'vue-router';
+import { computed } from 'vue';
 import Book from './Book.vue';
 
-const store = useBooksStore();
-const router = useRouter();
 const props = defineProps({
     book: Object,
     closeFunction: Function,
-});
-
-const coverURL = computed(() => {
-    return `http://covers.openlibrary.org/b/id/${props.book.cover_i}-M.jpg`;
-});
-
-const authorsString = computed(() => {
-    return props.book.author_name.join(', ').trimEnd();
 });
 
 </script>
