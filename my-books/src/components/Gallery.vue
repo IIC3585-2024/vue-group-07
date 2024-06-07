@@ -4,11 +4,11 @@ import { useRouter, useRoute } from 'vue-router';
 import BookCard from './BookCard.vue';
 import { getBooksByCategory } from '@/lib/getBooksbyCategory';
 import { categories } from '../data/categories';
-import { ref, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 
 const store = useCurrentStore();
 const router = useRouter();
-const currentCategory = store.currentCategory;
+let currentCategory = reactive(store.currentCategory);
 const books = ref([]);
 
 
@@ -16,6 +16,7 @@ if (useRoute().params.category === undefined) {
     router.push({ name: 'home' });
 } else {
     store.setCurrentCategory(categories.find(category => category.id === useRoute().params.category));
+    currentCategory = store.currentCategory;
 }
 
 function moveToBook(book) {
