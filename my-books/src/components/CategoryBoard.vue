@@ -1,56 +1,3 @@
-<template>
-    <div class="board">
-        <div class="row scroll-container">
-            <div class="col" v-for="category in categories" :key="category.id">
-                <h3>
-                    <a class="col-title green" @click="moveCategory(category)">
-                        {{ category.name }}
-                    </a>
-                </h3>
-                <BoardBookCard v-for="book in books[category.id]" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" :id="book.id" @click="moveToBook(book)"/>
-            </div>
-        </div>
-    </div>
-</template>
-
-<style>
-
-.board {
-    background-color: transparent;
-}
-
-.row {
-    display: flex;
-    align-items: flex-start;
-    padding: 10px;
-    min-height: 70vh;
-}
-
-.col {
-    display: flex;
-    flex-direction: column;
-    column-gap: 50px;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 0 1rem;
-    width: 20rem;
-    text-align: center;
-    align-content: start;
-    justify-items: center;
-    background-color: #202020;
-}
-
-.scroll-container {
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-.col-title:hover {
-    cursor: pointer;
-}
-</style>
-
 <script>
 import { categories } from '../data/categories';
 import { useCurrentStore } from '@/stores/current';
@@ -105,3 +52,56 @@ export default {
     }
 }
 </script>
+
+<template>
+    <div class="board">
+        <div class="row scroll-container">
+            <div class="col" v-for="category in categories" :key="category.id">
+                <h3>
+                    <a class="col-title green" @click="moveCategory(category)">
+                        {{ category.name }}
+                    </a>
+                </h3>
+                <BoardBookCard v-for="book in books[category.id]" :title="book.title" :authors="book.author_name" :cover-i="book.cover_i" :id="book.id" @click="moveToBook(book)"/>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+
+.board {
+    background-color: transparent;
+}
+
+.row {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    min-height: 70vh;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    column-gap: 50px;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0 1rem;
+    width: 20rem;
+    text-align: center;
+    align-content: start;
+    justify-items: center;
+    background-color: #202020;
+}
+
+.scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.col-title:hover {
+    cursor: pointer;
+}
+</style>
