@@ -1,24 +1,3 @@
-<template>
-<div class="navbar">
-    <div class="navtabs">
-        <h1 class="brand">
-            My books 📚
-        </h1>
-        <router-link
-            :to="tab.route"
-            v-for="(tab, index) in tabs"
-            :key="index"
-            @click="activateTab(tab)"
-            :class="{ 'navtab': true, 'active': tab.active }"
-            :data-target="tab.id"
-        >
-            
-            {{ tab.name }} 
-        </router-link>
-    </div>
-</div>
-</template>
-  
 <script>
 import { categories } from '../data/categories';
 import { useCurrentStore } from '@/stores/current';
@@ -51,6 +30,27 @@ export default {
     },
 };
 </script>
+
+<template>
+    <div class="navbar">
+        <div class="navtabs">
+            <h1 class="brand">
+                My books 📚
+            </h1>
+            <router-link
+                :to="tab.route"
+                v-for="(tab, index) in tabs"
+                :key="index"
+                @click="activateTab(tab)"
+                :class="{ 'navtab': true, 'active': tab.active }"
+                :data-target="tab.id"
+            >
+                
+                {{ tab.name }} 
+            </router-link>
+        </div>
+    </div>
+</template>
   
 <style scoped>
 
