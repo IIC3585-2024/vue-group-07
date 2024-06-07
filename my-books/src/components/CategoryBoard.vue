@@ -1,56 +1,37 @@
-<script>
+<script setup>
 import { categories } from '../data/categories';
 import { useCurrentStore } from '@/stores/current';
 import { useRouter } from 'vue-router';
 import BoardBookCard from './BoardBookCard.vue';
 import { getBooksByCategory } from '@/lib/getBooksbyCategory';
+import { ref, onMounted, reactive } from 'vue';
 
 
-
-
-export default {
-    setup() {
-        const store = useCurrentStore();
-        const router = useRouter();
-        const moveCategory = (category) => {
-            store.setCurrentCategory(category);
-            router.push({ name: 'gallery', params: { category: category.id } });
-        }
-        function moveToBook(book) {
-            const currentStore = useCurrentStore();
-            currentStore.setCurrentBook(book);
-            router.push({ name: 'book' , params: { id: book.id } });
-        }
-
-        return {
-            moveCategory,
-            moveToBook
-        }
-    },
-
-    mounted() {
-        try {
-            // get books from each category and set them to the books data
-            for (let category of categories) {
-                getBooksByCategory(category).then((books) => {
-                    this.books[category.id] = books;
-                });
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    },
-
-    data() {
-        return {
-            categories: categories,
-            books: []
-        }
-    },
-    components: {
-        BoardBookCard
-    }
+const store = useCurrentStore();
+const router = useRouter();
+const books = ref([]);
+const moveCategory = (category) => {
+    store.setCurrentCategory(category);
+    router.push({ name: 'gallery', params: { category: category.id } });
 }
+function moveToBook(book) {
+    const currentStore = useCurrentStore();
+    currentStore.setCurrentBook(book);
+    router.push({ name: 'book' , params: { id: book.id } });
+}
+
+onMounted(() => {
+    try {
+        // get books from each category and set them to the books data
+        for (let category of categories) {
+            getBooksByCategory(category).then((booksResponse) => {
+                books.value[category.id] = booksResponse;
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
+})
 </script>
 
 <template>
