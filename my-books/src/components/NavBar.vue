@@ -1,56 +1,42 @@
-<template>
-<div class="navbar">
-    <div class="navtabs">
-        <h1 class="brand">
-            My books 📚
-        </h1>
-        <router-link
-            :to="tab.route"
-            v-for="(tab, index) in tabs"
-            :key="index"
-            @click="activateTab(tab)"
-            :class="{ 'navtab': true, 'active': tab.active }"
-            :data-target="tab.id"
-        >
-            
-            {{ tab.name }} 
-        </router-link>
-    </div>
-</div>
-</template>
-  
-<script>
-import { categories } from '../data/categories';
-import { useCurrentStore } from '@/stores/current';
+<script setup>
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const router = useRouter();
-export default {
-    data() {
-        return {
-        tabs: [
-            { id: 'board', name: 'Board', route: '/', active: true },
-            { id: 'all-books', name: 'All Books', route: '/gallery/all', active: false },
-            { id: 'add-book', name: 'Add Book', route: '/add-book', active: false },
-        ],
-        categories: categories,
-        };
-    },
+const tabs = ref([
+    { id: 'board', name: 'Board', route: '/', active: true },
+    { id: 'all-books', name: 'All Books', route: '/gallery/all', active: false },
+    { id: 'add-book', name: 'Add Book', route: '/add-book', active: false },
+]);
 
-    setup() {
-        const router = useRouter();
-    },
+function activateTab(selectedTab) {
+    tabs.value.forEach(tab => {
+        tab.active = tab.id === selectedTab.id;
+    });
+}
 
-    methods: {
-        activateTab(selectedTab) {
-        this.tabs.forEach(tab => {
-            tab.active = tab.id === selectedTab.id;
-        });
-        },
-        
-    },
-};
 </script>
+
+<template>
+    <div class="navbar">
+        <div class="navtabs">
+            <h1 class="brand">
+                My books 📚
+            </h1>
+            <router-link
+                :to="tab.route"
+                v-for="(tab, index) in tabs"
+                :key="index"
+                @click="activateTab(tab)"
+                :class="{ 'navtab': true, 'active': tab.active }"
+                :data-target="tab.id"
+            >
+                
+                {{ tab.name }} 
+            </router-link>
+        </div>
+    </div>
+</template>
   
 <style scoped>
 

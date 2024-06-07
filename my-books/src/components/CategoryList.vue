@@ -1,3 +1,17 @@
+<script setup>
+import { categories } from '../data/categories';
+import { useCurrentStore } from '@/stores/current';
+import { useRouter } from 'vue-router';
+
+const store = useCurrentStore();
+const router = useRouter();
+const moveCategory = (category) => {
+    store.setCurrentCategory(category);
+    router.push({ name: 'gallery', params: { category: category.id } });
+}
+
+</script>
+
 <template>
     <div>
         <div class="categories">
@@ -11,32 +25,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import { categories } from '../data/categories';
-import { useCurrentStore } from '@/stores/current';
-
-import { useRouter } from 'vue-router';
-
-
-
-export default {
-    setup() {
-        const store = useCurrentStore();
-        const router = useRouter();
-        const moveCategory = (category) => {
-            store.setCurrentCategory(category);
-            router.push({ name: 'gallery', params: { category: category.id } });
-        }
-
-        return {
-            moveCategory
-        }
-    },
-    data() {
-        return {
-            categories: categories,
-        }
-    }
-}
-</script>

@@ -1,51 +1,36 @@
-<script>
+<script setup>
 import { useCurrentStore } from '@/stores/current';
 import { useRouter, useRoute } from 'vue-router';
 import BookCard from './BookCard.vue';
-import { useBooksStore } from '@/stores/db';
 import { getBooksByCategory } from '@/lib/getBooksbyCategory';
 import { categories } from '../data/categories';
+import { ref, reactive, onMounted } from 'vue';
 
-export default {
-    setup() {
-        const store = useCurrentStore();
-        const booksStore = useBooksStore();
-        const router = useRouter();
+const store = useCurrentStore();
+const router = useRouter();
+let currentCategory = reactive(store.currentCategory);
+const books = ref([]);
 
-        if (useRoute().params.category === undefined) {
-            router.push({ name: 'home' });
-        } else {
-            store.setCurrentCategory(categories.find(category => category.id === useRoute().params.category));
-        }
 
-        const currentCategory = store.currentCategory;
-
-        function moveToBook(book) {
-            const currentStore = useCurrentStore();
-            currentStore.setCurrentBook(book);
-            router.push({ name: 'book' , params: { id: book.id } });
-        }
-        return {
-            currentCategory,
-            booksStore,
-            moveToBook
-        }
-    },
-    mounted() {
-        getBooksByCategory(this.currentCategory)
-            .then(books => {
-                this.books = books;
-            })
-    },
-    data() {
-        return {
-            books: []
-        }
-    },
-    components: {
-        BookCard
-    }  
+if (useRoute().params.category === undefined) {
+    router.push({ name: 'home' });
+} else {
+    store.setCurrentCategory(categories.find(category => category.id === useRoute().params.category));
+    currentCategory = store.currentCategory;
 }
+
+function moveToBook(book) {
+    const currentStore = useCurrentStore();
+    currentStore.setCurrentBook(book);
+    router.push({ name: 'book' , params: { id: book.id } });
+}
+
+onMounted(() => {
+    getBooksByCategory(currentCategory)
+        .then(booksReponse => {
+            books.value = booksReponse;
+        })
+})
 
 </script>
 
