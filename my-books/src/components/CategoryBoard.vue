@@ -4,7 +4,7 @@ import { useCurrentStore } from '@/stores/current';
 import { useRouter } from 'vue-router';
 import BoardBookCard from './BoardBookCard.vue';
 import { getBooksByCategory } from '@/lib/getBooksbyCategory';
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted } from 'vue';
 
 
 const store = useCurrentStore();
