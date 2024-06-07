@@ -1,8 +1,6 @@
 <script setup>
 import { categories } from '../data/categories';
 import { useSearchBookStore } from '@/stores/searchBooks';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { ref } from 'vue';
 import BookCard from './BookCard.vue';
 import AddBookPopUp from './AddBookPopUp.vue';
@@ -11,11 +9,13 @@ import getBooksByParam from '@/lib/getBooksByParam';
 const text = ref('');
 const field = ref('q');
 const found = ref(true);
+const books = ref([]);
+const showAddBookPopUp = ref(false);
+const selectedBook = ref(null);
+
 
 // TODO: Mover función a un archivo de utilidades
 function searchBook() {
-    const store = useSearchBookStore();
-    // get values from the input fields
     let searchQuery = '';
     let searchParam = 'q';
     if (field.value === 'title') {
@@ -27,21 +27,33 @@ function searchBook() {
     if (text.value) {
         searchQuery = text.value;
     }
-    // get the search results from the API
-    try {
-        const getBooks = async () => {
-            books.value = await getBooksByParam(searchQuery, searchParam);
-            if (books.value.length === 0) {
+
+    getBooksByParam(searchQuery, searchParam)
+        .then((booksResponse) => {
+            books.value = booksResponse;
+            if (books.length === 0) {
                 found.value = false;
             } else {
                 found.value = true;
             }
-        }
-        getBooks();
-        
-    } catch (error) {
-        console.error(error);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+function addBook(book) {
+    selectedBook.value = {
+        key: book.key,
+        title: book.title,
+        author_name: book.author_name,
+        first_publish_year: book.first_publish_year,
+        cover_i: book.cover_i,
+        ratings_average: book.ratings_average,
+        ratings_count: book.ratings_count,
+        number_of_pages_median: book.number_of_pages_median,
     }
+    showAddBookPopUp.value = true;
 }
 
 </script>
@@ -70,39 +82,6 @@ function searchBook() {
 
     <AddBookPopUp v-if="showAddBookPopUp" :book="selectedBook" :close-function="() => showAddBookPopUp = false"/>
 </template>
-
-<script>
-
-const books = ref([]);
-const showAddBookPopUp = ref(false);
-const selectedBook = ref(null);
-
-function addBook(book) {
-    selectedBook.value = {
-        key: book.key,
-        title: book.title,
-        author_name: book.author_name,
-        first_publish_year: book.first_publish_year,
-        cover_i: book.cover_i,
-        ratings_average: book.ratings_average,
-        ratings_count: book.ratings_count,
-        number_of_pages_median: book.number_of_pages_median,
-    }
-    showAddBookPopUp.value = true;
-}
-
-export default {
-    data() {
-        return {
-            categories: categories,
-        }
-    },
-    components: {
-        BookCard,
-        AddBookPopUp
-    },
-}
-</script>
 
 <style scoped>
 
