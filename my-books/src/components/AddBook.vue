@@ -1,6 +1,4 @@
 <script setup>
-import { categories } from '../data/categories';
-import { useSearchBookStore } from '@/stores/searchBooks';
 import { ref } from 'vue';
 import BookCard from './BookCard.vue';
 import AddBookPopUp from './AddBookPopUp.vue';
